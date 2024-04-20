@@ -1,0 +1,495 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 1rem;
+}
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+@font-face {
+  font-family: 'Bebas Neue Regular';
+  src: url("../fonts/BebasNeueRegular.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bebas Neue Book';
+  src: url("../fonts/BebasNeueBook.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  height: 4.625rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  border-bottom: .0625rem solid rgba(235, 235, 240, 0.20);
+  transition: background-color 0.2s, height 0.2s, width 0.2s;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  padding-right: 1.25rem;
+  margin-left: 1.25rem;
+  border-right: .0625rem solid rgba(235, 235, 240, 0.2);
+  height: 100%;
+}
+.logo {
+  height: 70px;
+  width: 80px;
+}
+.header-image {
+  background-image: url('../image/header.jpg');
+  height: 48.4375rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center left 0rem;
+  position: relative;
+}
+.header-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(41, 45, 51, 0.60);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.navbar-list{
+  display: flex;
+  align-items: center;
+  flex-basis: 100%;
+  list-style: none;
+  height: 100%;
+  font-size: 1rem;
+}
+.header-link {
+  text-decoration:  none;
+  color: #fff;
+  position: relative;
+}
+.header-link:hover {
+  color: #40E0D0;
+  transition: color 0.2s;
+}
+.navbar-item {
+  padding: 1.25rem;
+}
+.button {
+  height: 4.7rem;
+  width: 15.625rem;
+  color: #ffffff;
+  background: #0000CD;
+  padding: 1.25rem 3.0625rem;
+  cursor: pointer;
+  border: none; /* Нет обводки */
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 160%;
+}
+.container {
+  max-width: 1440px;
+  margin-left: 12rem;
+}
+.header-content {
+  padding-top: 13.8rem;
+  position: relative;
+  z-index: 1;
+  color: #ffffff
+}
+.seporator {
+  background: #0000CD;
+  width: 7.5rem;
+  height: .125rem; 
+  margin-top: .8125rem;
+}
+.header-title {
+  max-width: 51.25rem;
+  line-height: 120%;
+  font-family: Bebas Neue Regular;
+  font-size: 4rem;
+  font-weight: 600;
+  margin: 1.125rem 0;
+}
+.header-text {
+  max-width: 36.375rem;
+  font-family: Noto Sans;
+  height: 100%;
+  font-size: .75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 172%;
+  margin-bottom: 2.5625rem;
+  margin-top: 1.9375rem;
+  word-spacing: .0813rem;
+  letter-spacing: .0206rem;
+}
+.header-button {
+  min-width: 17.9375rem;
+}
+.section-title {
+  font-family: 'Bebas Neue Book';
+  color: #292D33;
+  font-size: 3.0562rem;
+  line-height: 120%;
+  margin-bottom: 46px;
+  margin-top: 1.125rem;
+  margin-bottom: 2.5625rem;
+  word-spacing: 0.6px;
+}
+.about {
+  position: relative;
+  min-height: 31.049999999999997rem;
+  margin-bottom: 14rem;
+}
+.about-car-photo {
+  position:absolute;
+  left: 0;
+  top: 5.5rem;
+  height: 100%;
+  object-fit: cover;
+}
+.about-content-wrapper {
+  display: flex;
+  justify-content: end;
+}
+.about-content {
+  max-width: 43.2rem;
+  padding-top: 10.8rem;
+}
+.about-text {
+  color: #828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-top: -0.1rem;;
+  word-spacing: .0481rem;
+  margin-bottom: 1.125rem;
+  padding-right: 6.75rem;
+}
+
+.study-text {
+  color: #828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-top: -0.1rem;;
+  word-spacing: .0481rem;
+  margin-bottom: 1.125rem;
+  padding-right: 10.875rem;
+}
+.study-list {
+  list-style-type: none;
+  margin-left: -2.5rem;
+}
+.study-item {
+  color:#292D33;
+  font-size: 0.9rem;
+  padding-bottom: 1.25rem;
+}
+.study-item-text {
+  padding-left: 1.25rem;
+}
+.section-study {
+  display: flex;
+}
+.study-photo {
+  border: .0625rem solid rgba(0, 0, 0, 0.2);
+  height: 100%;
+  height: 450px;
+  width: 450px;
+  object-fit: cover;
+  margin-right: 1.875rem;
+}
+.grey-section {
+  background-color: #F3F3F3;
+}
+.quiz {
+  padding-top: 1.875rem;
+  margin-top: 2.5rem;
+}
+.quiz-list {
+  -moz-column-count: 2; /* Для Firefox */
+  -webkit-column-count: 2; /* Для Safari и Chrome */
+  column-count: 2;
+  max-width: 45.5625rem;
+}
+.quiz-text {
+  color: #828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-top: -0.1rem;;
+  word-spacing: .0481rem;
+  margin-bottom: 1.125rem;
+  padding-right: 46.8rem;
+}
+.quiz-item {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  font-size: 0.8rem;
+  margin-left: -3rem;
+  gap: .625rem
+}
+.section-school {
+  display: flex;
+  margin-top: 3.9rem;
+  margin-bottom: 3.75rem;
+}
+.school-photo {
+  position:absolute;
+  right: 0;
+  /* height: 100%; */
+  height: 500px;
+  object-fit: cover;
+  padding-top: 4.9rem;
+  margin-right: 2.5rem;
+}
+.button-quiz {
+  height: 3.5rem;
+  padding: 0.25rem;
+  margin-bottom: 1.875rem;
+}
+
+.section-cta {
+  position: relative;
+  padding-top: 6.25rem;
+  margin-top: -0.9rem;
+  padding-bottom: 4.25rem;
+}
+.cta-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-width: 45rem;
+  width: 38%;
+  height: 33.125rem;
+}
+.cta-form-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+.cta-form {
+  max-width: 52.5rem;
+  margin-right: 6.4375rem;
+}
+.cta-form-text {
+  color: #828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 185%;
+  margin-bottom: 2.5rem;
+  max-width: 32rem;
+  margin-top: -1.625rem;
+}
+.input-group-wrapper {
+  display: flex;
+  gap: 1.1rem;
+}
+.input-group-vertical {
+  display: flex;
+  flex-direction: column;
+}
+.input-group {
+  position: relative;
+  height: 3.125rem;
+  flex-grow: 1;
+  background-color: #F0F2F5;
+}
+.input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1.25rem 1.875rem;
+  border: 1px solid #E4E4EB;
+  background-color: inherit;
+}
+.input-group-label {
+  position: absolute;
+  cursor: text;
+  top: 0.9rem;
+  left: 1.7rem;
+  color: #828A99;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  transition: top 0.2s, left 0.2s, font-size 0.2s;
+}
+.input:focus {
+  border: 1px solid #5C8EE5;
+  outline: 0;
+}
+.input:focus ~ .input-group-label,
+.input:not(:placeholder-shown).input:not(:focus) ~ .input-group-label {
+  top: -0.5rem;
+  left: 1.25rem;
+  font-size: .625rem;
+  background-color: inherit;
+  padding: 0 .625rem;
+}
+.cta-form-footer {
+  display: flex;
+  margin-top: 1.67rem;
+  gap: 1.875rem;
+  align-items: center;
+}
+.cta-form-button {
+  flex-shrink: 0;
+  height: 3.125rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.notify {
+  display: flex;
+  align-items: flex-start;
+  gap: .625rem;
+}
+.notify-icon {
+  flex-shrink: 0;
+}
+.notify-text {
+  max-width: 23.75rem;
+  margin: 0;
+  color:#828A99;
+  font-size: .65rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+.footer-top {
+  display: flex;
+  align-items: center;
+  padding-top: 2.8rem;
+  padding-bottom: 1.7rem;
+  /*justify-content: space-between; Возможно убрать*/
+}
+.footer-logo {
+  width: 9.9rem;
+  height: 3.75rem;
+}
+.footer-phone {
+  color: #292D33;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%; 
+  text-decoration-line: underline;
+  padding-left: 8rem;
+  flex-shrink: 0;
+}
+.footer-social-link {
+  text-decoration: none;
+}
+.footer-info {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-style: normal;
+  color: #292D33;
+  padding-left: 4.1rem;
+  gap: .5rem;
+}
+.footer-info-address,
+.footer-info-email {
+  font-style: inherit;
+  text-decoration: inherit;
+  color: inherit;  
+  font-size: 0.8rem;
+}
+.footer-social {
+  padding-left: 2.1rem;
+}
+.footer-seporator {
+  color: #EBEBF0;
+  background-color: #EBEBF0;
+  margin-bottom: 0px;
+}
+.footer-bottom {
+  display: flex;
+  padding-top: 2.6rem;
+  padding-bottom: 1.125rem;
+}
+.footer-menu-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #292D33;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%; 
+}
+.footer-menu-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style: none;
+}
+.footer-menu-column-2 {
+  columns: 14rem auto;
+  min-width: 36rem;
+}
+.footer-menu-link {
+  text-decoration: none;
+  color: #828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-bottom: 0.78rem;
+  display: block;
+}
+.footer-menu-link-bold {
+  color: #292D33;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+  margin-bottom: 1.5rem;
+}
+.footer-menu-wrapper:last-child {
+  margin-left: 8rem;
+}
+.footer-wrapper {
+  padding-bottom: 1.25rem;
+  color: #828A99;
+  font-style: normal;
+  padding-top: .875rem;
+}
+.footer-wrapper,
+.footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+.footer-copyright,
+.footer-policy {
+  margin: 0rem;
+  font-size: .6rem;
+  font-weight: 400;
+  line-height: 160%;
+  color: inherit;
+}
+.footer-author {
+  font-size: 0.6rem;
+  padding-right: 7.7rem;
+}
+.footer-social-icon {
+  padding-top: .25rem;
+}
+
