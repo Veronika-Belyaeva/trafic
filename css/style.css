@@ -275,8 +275,8 @@ body {
   bottom: 0;
   left: 0;
   max-width: 45rem;
-  width: 38%;
-  height: 33.125rem;
+  width: 41%;
+  height: 27.1rem;
 }
 .cta-form-wrapper {
   display: flex;
@@ -492,4 +492,211 @@ body {
 .footer-social-icon {
   padding-top: .25rem;
 }
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(41, 45, 51, 0.50);
+  z-index: 10;
+  display: flex;
+}
+.modal.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+}
+.modal.is-open .modal-dialog {
+  transform: translateY(0);
+  opacity: 1;
+}
+.modal-dialog {
+  background: #fff;
+  margin: auto;
+  max-width: 23rem;
+  padding: 2.5rem 3rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-10%);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.modal-close {
+  display: block;
+  position: absolute;
+  top: 2.5rem;
+  right: 1.1rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #EBEBF0;
+}
+.modal-title {
+  font-family: 'Bebas Neue Regular';
+  color:#292D33;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+.modal-text {
+  color:#828A99;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 163%;
+  margin-bottom: 1.875rem;
+}
+.modal-input-group {
+  background-color: #fff;
+}
+.modal-input-label {
+  top: 0.7rem;
+  left: 1.5rem;
+}
+.modal-form-footer {
+  margin-top: 1.875rem;
+}
+.modal-form-button {
+  display: block;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
+.registration {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../image/sunset.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center left 0rem;
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  min-width: 29.375rem;
+  width: 100%;
+  border-radius: 12px;
+  padding: 20px 30px 120px;
+  background: #4070f4;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.form.login {
+  position: absolute;
+  left: 50%;
+  bottom: -86%;
+  transform: translateX(-50%);
+  width: calc (100% + 220px);
+  padding: 20px 140px;
+  height: 100%;
+  background: #fff;
+  transition: all 0.6s ease;
+}
+.wrapper.active
+  .form.login {
+  bottom: -15%;
+  border-radius: 35%;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+}
+.form
+  header {
+  font-size: 30px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.form.login
+  header {
+  color: #333;
+  opacity: 0.6;
+}
+.wrapper.active
+  .form.login
+  header {
+  opacity: 1;
+}
+.wrapper.active
+  .signup
+  header {
+  opacity: 0.6;
+}
+.wrapper
+  form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+form
+  input {
+  height: 60px;
+  outline: none;
+  border: none;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 8px;
+  background: #fff;
+}
+.form.login
+  input {
+  border: 1px solid #aaa;
+}
+.form.login
+  input:focus {
+  box-shadow: 0 1px 0 #ddd;
+}
+form
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.checkbox
+  input[type="checkbox"] {
+  height: 16px;
+  width: 16px;
+  accent-color: #fff;
+  cursor: pointer;
+}
+form
+  .checkbox
+  label {
+    cursor: pointer;
+    color: #fff;
+}
+form a {
+  color: #333;
+  text-decoration: none;
+}
+form
+  a:hover {
+  text-decoration: underline;
+}
+form
+  input[type="submit"] {
+  margin-top: 15px;
+  padding: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.form.login
+  input[type="submit"] {
+  background: #4070f4;
+  color: #fff;
+  border: none;
+}

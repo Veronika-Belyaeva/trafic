@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/swiper-bundle.min.css">
   <title>Билетики</title>
 </head>
 <body>
@@ -22,21 +21,23 @@
     </a>
     <ul class="navbar-list">
       <li class="navbar-item">
-        <a href="#" class="header-link">О нас</a>
+        <a href="#about" class="header-link">О нас</a>
       </li>
       <li class="navbar-item">
-        <a href="#" class="header-link">Учебные материалы</a>
+        <a href="#study" class="header-link">Учебные материалы</a>
       </li>
       <li class="navbar-item">
-        <a href="#" class="header-link">Квизы</a>
+        <a href="#quiz" class="header-link">Квизы</a>
       </li>
       <li class="navbar-item">
-        <a href="#" class="header-link">Обратная связь</a>
+        <a href="#phone" class="header-link">Обратная связь</a>
       </li>
     </ul>
-    <button class="button navbar-button">
-      <span class="button-text">Зарегестрироваться</span>
-    </button>
+    <a href="/registration.html" class="button-link">
+      <button class="button navbar-button">
+        <span class="button-text">Зарегестрироваться</span>
+      </button>
+    </a>
 
   </nav>
   <header class="header header-image">
@@ -49,12 +50,12 @@
         <p class="header-text">
           Наш сайт — ваш источник информации о Правилах Дорожного Движения и возможность проверить свои знания через тесты и квизы. Обсудите интересующие вас вопросы на форуме или свяжитесь с нами для получения поддержки.
         </p>
-        <button class="button header-button">Подробнее о компании</button>
+        <button class="button header-button" data-toggle="modal">Есть вопросы?</button>
       </div>
     </div>
   </header>
 
-  <section class="section about">
+  <section id="about" class="section about">
     <img src="image/plan.png" alt="Car" class="about-car-photo">
     <div class="container">
       <div class="about-content-wrapper">
@@ -68,7 +69,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section id="study" class="section">
     <div class="container section-study">
       <div class="study-content-wrapper">
         <div class="study-content">
@@ -104,7 +105,7 @@
       <img src="image/bilet.png" alt="" class="study-photo">
     </div>
   </section>
-  <section class="section grey-section section-school">
+  <section id="quiz" class="section grey-section section-school">
     <div class="container quiz">
       <div class="wrapper-school">
         <div class="seporator"></div>
@@ -165,13 +166,18 @@
         <p class="quiz-text">
           Для того чтобы начать проходить квизы, нужно зарегистрироваться. Это нужно для вас, чтобы вы смогли смотреть на ваши результаты
         </p>
-        <button class="button button-quiz">Регистрация</button>
+        <a href="/registration.html" class="">
+          <button class="button navbar-button">
+            <span class="button-text">Зарегестрироваться</span>
+          </button>
+        </a>
+ 
       </div>
     </div>
     <img src="image/schoolavto.png" alt="schoolavto" class="school-photo">
   </section>
-  <section class="cta">
-    <div class="bg-grey section-cta">
+  <section id="phone" class="cta">
+    <div class="grey-section section-cta">
       <img src="image/pass.png" alt="pass to exam" class="cta-image">
       <div class="cta-form-wrapper container">
         <form action="handler.php" method="POST" class="cta-form">
@@ -235,111 +241,106 @@
         </svg>  
         <a href="tel:+74996861014" class="footer-phone">+7 (499) 686-10-14</a>
         <div class="footer-info">
-          <svg class="address-icon" height="20" width="20">
-            <use href="img/sprite.svg#mark"></use>
-          </svg> 
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.625 19.6875C12.3438 20.125 11.6875 20.125 11.4062 19.6875C6.84375 13.125 6 12.4375 6 10C6 6.6875 8.6875 4 12 4C15.3438 4 18 6.6875 18 10C18 12.4375 17.1875 13.125 12.625 19.6875ZM12 12.5C13.4062 12.5 14.5 11.4062 14.5 10C14.5 8.625 13.4062 7.5 12 7.5C10.625 7.5 9.5 8.625 9.5 10C9.5 11.4062 10.625 12.5 12 12.5Z" fill="#5C8EE6"/>
+            </svg>            
           <address class="footer-info-address">г. Мосвка, Холодильный пер. 4к1с8</address>
         </div>
         <div class="footer-info">
-          <svg class="main-icon" height="20" width="20">
-            <use href="img/sprite.svg#mail"></use>
-          </svg> 
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.3125 9.96875C5.03125 10.5312 5.9375 11.2188 9.125 13.5312C9.75 14 10.9062 15.0312 12 15.0312C13.125 15.0312 14.25 14 14.9062 13.5312C18.0938 11.2188 19 10.5312 19.7188 9.96875C19.8438 9.875 20 9.96875 20 10.125V16.5C20 17.3438 19.3438 18 18.5 18H5.5C4.6875 18 4 17.3438 4 16.5V10.125C4 9.96875 4.1875 9.875 4.3125 9.96875ZM12 14C11.2812 14.0312 10.25 13.0938 9.71875 12.7188C5.5625 9.71875 5.25 9.4375 4.3125 8.6875C4.125 8.5625 4 8.34375 4 8.09375V7.5C4 6.6875 4.6875 6 5.5 6H18.5C19.3438 6 20 6.6875 20 7.5V8.09375C20 8.34375 19.9062 8.5625 19.7188 8.6875C18.7812 9.4375 18.4688 9.71875 14.3125 12.7188C13.7812 13.0938 12.75 14.0312 12 14Z" fill="#5C8EE6"/>
+            </svg>
+             
           <a href="mailto:a.dragunov@tdaliance.ru" class="footer-info-email">a.dragunov@tdaliance.ru</a>
         </div>
         <div class="footer-social">
           <a href="#" class="footer-social-link">
-            <svg class="footer-social-icon" height="26" width="26">
-              <use href="img/sprite.svg#vk"></use>
-            </svg> 
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.4439 16.7569C20.6455 15.32 18.5889 13.5935 17.7398 12.8422C17.5074 12.6365 17.4826 12.2806 17.694 12.0531C19.3144 10.3119 20.6104 8.31123 21.0565 7.1023C21.2533 6.56826 20.8459 6.004 20.2719 6.004H18.6044C18.0548 6.004 17.7331 6.20127 17.5799 6.51538C16.2332 9.27491 15.078 10.4692 14.2694 11.1672C13.8167 11.5581 13.1107 11.2343 13.1107 10.6393C13.1107 9.49306 13.1107 8.01133 13.1107 6.96057C13.1107 6.45096 12.6939 6.03865 12.1799 6.03865L9.13379 6.004C8.75036 6.004 8.53132 6.43808 8.76147 6.74242L9.26441 7.4644C9.45368 7.71454 9.55587 8.01888 9.55587 8.33122L9.55321 11.5826C9.55321 12.1482 8.86766 12.4245 8.46068 12.0282C7.08381 10.6873 5.88909 7.94913 5.45901 6.63979C5.33461 6.2608 4.97962 6.00489 4.57709 6.004L2.93452 6C2.31828 6 1.86777 6.58425 2.03527 7.1725C3.5361 12.4405 6.61552 17.4522 12.1035 17.9956C12.6442 18.0489 13.1107 17.6135 13.1107 17.0745V15.3658C13.1107 14.8757 13.495 14.4545 13.9891 14.4421C14.0064 14.4416 14.0237 14.4416 14.041 14.4416C15.4926 14.4416 17.1182 16.5543 17.6869 17.5424C17.8504 17.8267 18.1561 18 18.4867 18H20.6962C21.3408 18 21.7545 17.3162 21.4439 16.7569Z" fill="#5C8EE6"/>
+              </svg>               
           </a>
           <a href="#" class="footer-social-link">
-            <svg class="footer-social-icon" height="26" width="26">
-              <use href="img/sprite.svg#inst"></use>
-            </svg> 
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.44444 4C5.99378 4 4 5.99378 4 8.44444V15.5556C4 18.0062 5.99378 20 8.44444 20H15.5556C18.0062 20 20 18.0062 20 15.5556V8.44444C20 5.99378 18.0062 4 15.5556 4H8.44444ZM8.44444 5.77778H15.5556C17.0258 5.77778 18.2222 6.97422 18.2222 8.44444V15.5556C18.2222 17.0258 17.0258 18.2222 15.5556 18.2222H8.44444C6.97422 18.2222 5.77778 17.0258 5.77778 15.5556V8.44444C5.77778 6.97422 6.97422 5.77778 8.44444 5.77778ZM16.4444 6.66667C16.2087 6.66667 15.9826 6.76032 15.8159 6.92702C15.6492 7.09372 15.5556 7.31981 15.5556 7.55556C15.5556 7.7913 15.6492 8.0174 15.8159 8.18409C15.9826 8.35079 16.2087 8.44444 16.4444 8.44444C16.6802 8.44444 16.9063 8.35079 17.073 8.18409C17.2397 8.0174 17.3333 7.7913 17.3333 7.55556C17.3333 7.31981 17.2397 7.09372 17.073 6.92702C16.9063 6.76032 16.6802 6.66667 16.4444 6.66667ZM12 7.55556C9.54933 7.55556 7.55556 9.54933 7.55556 12C7.55556 14.4507 9.54933 16.4444 12 16.4444C14.4507 16.4444 16.4444 14.4507 16.4444 12C16.4444 9.54933 14.4507 7.55556 12 7.55556ZM12 9.33333C13.4702 9.33333 14.6667 10.5298 14.6667 12C14.6667 13.4702 13.4702 14.6667 12 14.6667C10.5298 14.6667 9.33333 13.4702 9.33333 12C9.33333 10.5298 10.5298 9.33333 12 9.33333Z" fill="#5C8EE6"/>
+              </svg>  
+                          
           </a>
         </div>
         <!-- /.footer-social -->
       </div>
       <!-- /.footer-top -->
     </div>
-    <hr color="#EBEBF0" class="footer-seporator">
-    <div class="container">
-      <div class="footer-bottom">
-        <div class="footer-menu-wrapper">
-          <h2 class="footer-menu-title">Контрактное производство</h2>
-          <ul class="footer-menu-list footer-menu-column-2">
-            <li class="footer-menu-item">
-              <a href="/product_avtohim.php" class="footer-menu-link">Автомобильная химия</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Бытовая химия</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Дезинфицирующие средства</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Пищевые аэрозоли</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Косметическая продукция</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Краски аэрозольные</a>
-            </li>
-          </ul>
-        </div>
-        <!-- /.footer-menu-wrapper -->
-        <div class="footer-menu-wrapper">
-          <h2 class="footer-menu-title">Собственные марки</h2>
-          <ul class="footer-menu-list">
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Автохимия AG-Tech</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link">Автохимия AP</a>
-            </li>
-          </ul>
-        </div>
-        <!-- /.footer-menu-wrapper -->
-        <div class="footer-menu-wrapper">
-          <ul class="footer-menu-list">
-            <li class="footer-menu-item">
-              <a href="/about.php" class="footer-menu-link footer-menu-link-bold">О компании</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link footer-menu-link-bold">Новости</a>
-            </li>
-            <li class="footer-menu-item">
-              <a href="#" class="footer-menu-link footer-menu-link-bold">Контакты</a>
-            </li>
-          </ul>
-        </div>
-        <!-- /.footer-menu-wrapper -->
-      </div>
-      <!-- /.footer-bottom -->
-    </div>
-    <!-- /.container -->
+    
     <hr color="#EBEBF0" class="footer-seporator">
     <div class="container">
       <div class="footer-wrapper">
         <div class="footer-legal">
-          <p class="footer-copyright">
-            
+          <p class="footer-copyright"> 
+            <?php echo date('Y')?> «Traffic laws». Все права защищены.</p>
             <a href="#" class="footer-policy">Политики конфиденциальности</a>
         </div>
         <!-- /.footer-legal -->
-        <div class="footer-author">
-          <span class="made-in">Сделано в</span>
-          <svg class="footer-social-icon" height="11" width="40">
-            <use href="img/sprite.svg#RUSO"></use>
-          </svg> 
-        </div>
-        <!-- /.footer-author -->
       </div>
       <!-- /.footer-wrapper -->
     </div>
     <!-- /.container -->
   </footer>
+  <div class="modal">
+    <div class="modal-dialog">
+      <h2 class="modal-title">Есть вопросы?</h2>
+      <a href="#" class="modal-close" data-toggle="modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.86726 3.16003L3.16016 3.86714L11.292 11.9989L3.1603 20.1306L3.8674 20.8377L11.9991 12.706L20.1307 20.8377L20.8378 20.1306L12.7062 11.9989L20.838 3.86714L20.1309 3.16003L11.9991 11.2918L3.86726 3.16003Z" fill="#828A99"/>
+          </svg>          
+      </a>
+      <p class="modal-text">
+        Оставьте заявку, наш менеджер свяжется с Вами в ближайшее время ответит на все интересующие вопросы и поможем даже в самых сложных случаях! 
+      </p>
+      <form action="#" class="modal-form">
+        <div class="input-group-wrapper input-group-vertical">
+          <div class="input-group modal-input-group">
+            <input 
+            id="modal-user-name" 
+            type="text" 
+            class="input modal-input"
+            name="username"
+            placeholder=" "
+            maxLength="100"
+            required
+            >
+            <label class="input-group-label modal-input-label" for="modal-user-name">Имя</label>
+          </div>
+          <!-- /.input-group -->
+          <div class="input-group modal-input-group">
+            <input 
+            id="modal-user-phone" 
+            type="text" 
+            class="input modal-input"
+            name="user-phone"
+            placeholder=" "
+            maxLength="30"
+            required
+            >
+            <label class="input-group-label modal-input-label" for="modal-user-phone">Номер телефона</label>
+          </div>
+          <!-- /.input-group -->
+        </div>
+        <!-- /.input-group-wrapper -->
+        <div class="modal-form-footer">
+          <button type="submit" class="button modal-form-button">Отправить заявку</button>
+          <div class="notify">
+            <svg width="35" height="35" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.9222 2.94626L7.42 1.07035C7.2793 1.02345 7.13861 1 6.99792 1C6.83377 1 6.69308 1.02345 6.55239 1.07035L2.05019 2.94626C1.62811 3.13385 1.37017 3.53249 1.37017 3.97802C1.37017 8.64436 4.04335 11.8569 6.55239 12.9121C6.83377 13.0293 7.13861 13.0293 7.42 12.9121C9.43661 12.0679 12.6257 9.18368 12.6257 3.97802C12.6257 3.53249 12.3443 3.13385 11.9222 2.94626ZM10.1617 5.72512L6.50549 9.14349C6.3648 9.30763 6.10686 9.30763 5.96616 9.14349L3.95625 7.37141C3.81556 7.23072 3.81556 6.99623 3.95625 6.85554L4.24099 6.5708C4.38168 6.43011 4.61617 6.43011 4.75687 6.5708L6.30267 7.91226L9.41619 4.97962C9.55689 4.83893 9.79138 4.83893 9.93207 4.97962L10.1617 5.20924C10.3024 5.34994 10.3024 5.58443 10.1617 5.72512Z" fill="#828A99"/>
+              </svg>               
+            <p class="notify-text">
+              Обращаясь к нам вы получаете не только профессиональную работу, но и абсолютную конфиденциальность информации!
+            </p>
+          </div>
+        </div>
+        <!-- /.modal-form-footer -->
+      </form>
+    </div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 </html>
