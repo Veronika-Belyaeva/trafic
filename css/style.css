@@ -705,3 +705,206 @@ form
   font-weight: bold;
 }
 
+.body-personal,
+.html-personal{
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.main-container {
+  display: flex;
+  height: 100%;
+}
+
+.main-title {
+  font-size: 2.25rem;
+  margin-top: 1.1rem;
+  padding: 0.8rem;
+  letter-spacing: 4.2px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.sidebar {
+  min-width: 21.5rem; /* Ширина боковой панели */
+  background-color: #AA5D5D; /* Цвет боковой панели */
+  padding: .25rem;
+  padding-top: 0;
+  box-sizing: border-box; /* Включаем padding в ширину элемента */
+}
+
+
+.container-personal {
+  padding: .25rem;
+}
+
+.wrapper-list {
+  padding: 1.25rem;
+  padding-left: 0;
+}
+
+.personal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 1.25rem;
+}
+
+.personal-item {
+  margin-bottom: 1.7rem;
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+}
+
+.personal-link {
+  text-decoration: none;
+  border: none;
+  color: #fff;
+}
+
+.personal-link.active-link {
+  font-weight: bold;
+  color: #000;
+}
+.personal-seporator {
+  background: #fff;
+  width: 128%;
+  height: .025rem;
+  margin-top: 0.9rem;
+  margin-left: -3.375rem;
+}
+.personal-title {
+  font-size: 2.5rem;
+}
+.section-personal {
+  flex: 1;
+  padding: 1rem;
+  max-height: 100%;
+}
+.info-personal,
+.form-edit input {
+  background-color: #E8E8E8;
+  border-radius: .3125rem;
+  max-width: 29.9rem;
+  height: 2.65rem;
+}
+.info-text {
+  padding: .625rem;
+  font-size: 1.25rem;
+}
+.info {
+  color: #7f6f6f;
+  font-size: 1rem;
+  margin-bottom: -0.625rem;
+}
+.button-personal-link{
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  position: fixed;
+  bottom: 20px; /* Отступ от нижнего края */
+  right: 20px;  /* Отступ от правого края */
+  padding: 10px 10px;
+  background-color: #E8E8E8; /* Цвет кнопки */
+  border-radius: 5px;
+  cursor: pointer;
+}
+.edit-link {
+  text-decoration: none;
+  color: #000; /* Цвет текста */
+  font-size: 1.25rem;
+}
+
+.edit-linkn:hover {
+  background-color: darkblue; /* Цвет кнопки при наведении */
+}
+.form-edit {
+  display: grid;
+}
+.form-edit label { 
+  font-size: 1.175rem;
+  margin-bottom: .3125rem;
+}
+.form-edit input {
+  margin-bottom: .625rem;
+}
+.edit-submit {
+  outline: none;
+  background: inherit;
+  color: inherit;
+  border: none;
+  font-size: 1.175rem;
+}
+.edit-submit:focus {
+  outline: none;
+  box-shadow: none;
+  background: inherit;
+  color: inherit;
+  border: none;
+}
+.ticket-list { 
+  list-style-type: none; 
+  padding: 0; 
+  list-style: none;
+}
+.ticket-list li { 
+  margin-bottom: .625rem; 
+  list-style: none;
+  color:#000;
+}
+.section-tickets {
+  max-height: 100%;
+  /* margin-left: 5rem; */
+  padding: 1rem;
+  margin-right: 1.25rem;
+}
+
+.question { margin-bottom: 1.25rem; }
+.question ul { list-style-type: none;}
+.question li { display: flex; align-items: center; gap: .4375rem; max-width: 50rem;}
+.question img { max-width: 100%; height: auto; }
+.correct { background-color: #aafaa0; }
+.incorrect { background-color: #faa0a0; }
+.nav { display: flex; margin-bottom: 1.25rem; }
+.nav a { text-decoration: none; padding: .5rem .8125rem; color: #000;}
+.nav a.selected { font-weight: bold; background-color: #d3d3d3; }
+.nav a.correct { background-color: #aafaa0; }
+.nav a.incorrect { background-color: #faa0a0; }
+.question-text {
+  max-width: 58.5rem;
+}
+.button-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 30px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+}
+
+.button-submit:hover {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+}
+
+.button-submit:active {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+.button-submit:focus {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+
