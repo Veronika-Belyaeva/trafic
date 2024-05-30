@@ -23,19 +23,7 @@ if (isset($_SESSION['last_access']) && time() - $_SESSION['last_access'] > 900) 
 // Обновляем время последнего доступа пользователя
 $_SESSION['last_access'] = time();
 
-// Подключение к базе данных
-$host = 'localhost'; // Хост базы данных
-$port = '5432'; // Порт базы данных
-$dbname = 'Tickets';
-$username = 'postgres';
-$password = 'cgQ1wpi';
-
-try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$username;password=$password");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Ошибка подключения к базе данных: " . $e->getMessage());
-}
+require 'db_connection.php';
 
 // Функция для получения вопросов по идентификатору билета
 function getQuestionsForTicket($pdo, $ticket_id) {
@@ -99,30 +87,37 @@ if (!isset($_SESSION['answers'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Проверяем, установлен ли уже ответ для текущего вопроса
-  if ($_SESSION['answers'][$current_question_index] === null) {
-      $user_answer = isset($_POST['answer']) ? intval($_POST['answer']) : null;
-      $_SESSION['answers'][$current_question_index] = $user_answer;
+    // Проверяем, установлен ли уже ответ для текущего вопроса
+    if ($_SESSION['answers'][$current_question_index] === null) {
+        $user_answer = isset($_POST['answer']) ? intval($_POST['answer']) : null;
+        $_SESSION['answers'][$current_question_index] = $user_answer;
 
-      // Проверка правильного ответа
-      $correct_answer = intval($questions[$current_question_index]['correct_answer']);
-      if ($user_answer !== $correct_answer) {
-          $_SESSION['correct_answers'][$current_question_index] = [
-              'correct_answer' => $correct_answer,
-              'explanation' => $questions[$current_question_index]['explanation']
-          ];
-      }
+        // Проверка правильного ответа
+        $correct_answer = intval($questions[$current_question_index]['correct_answer']);
+        if ($user_answer !== $correct_answer) {
+            $_SESSION['correct_answers'][$current_question_index] = [
+                'correct_answer' => $correct_answer,
+                'explanation' => $questions[$current_question_index]['explanation']
+            ];
+        }
 
-      $current_question_index++;
-  }
+        // Добавляем информацию о данном ответе в базу данных
+        try {
+            $stmt = $pdo->prepare("INSERT INTO user_answers (user_id, question_id, user_answer, is_correct) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$user_id, $questions[$current_question_index]['question_id'], $user_answer, $user_answer === $correct_answer ? 1 : 0]);
+        } catch (PDOException $e) {
+            // Обработка ошибки
+        }
 
-  // Переход к следующему вопросу, если еще остались вопросы
-  if ($current_question_index < $total_questions) {
-      header("Location: ticket.php?ticket_id={$ticket_id}&question={$current_question_index}");
-      exit();
-  }
+        $current_question_index++;
+    }
+
+    // Переход к следующему вопросу, если еще остались вопросы
+    if ($current_question_index < $total_questions) {
+        header("Location: ticket.php?ticket_id={$ticket_id}&question={$current_question_index}");
+        exit();
+    }
 }
-
 // Проверяем, были ли даны ответы на все вопросы
 $all_answered = !in_array
 (null, $_SESSION['answers'], true);
@@ -140,10 +135,8 @@ if ($all_answered) {
     $percentage = round(($score / $total_questions) * 100);
     echo "<p>Вы ответили правильно на {$score} из {$total_questions} вопросов ({$percentage}%).</p>";
     echo "<a href=\"ticket.php?ticket_id={$ticket_id}\">Пройти тест заново</a>";
-    // Очистка ответов для повторного прохождения
-    unset($_SESSION['answers']);
-    unset($_SESSION['correct_answers']);
-    exit();
+
+
 }
 
 // Вывод текущего вопроса

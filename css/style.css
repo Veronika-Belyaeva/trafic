@@ -575,7 +575,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../image/sunset.png");
+  /* background-image: url("../image/sunset.png"); */
+  background: #123456;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center left 0rem;
@@ -704,17 +705,28 @@ form
   color: red;
   font-weight: bold;
 }
-
-.body-personal,
-.html-personal{
-  margin: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
+.sidebar {
+  min-width: 21.5rem; /* Ширина боковой панели */
+  background-color: #AA5D5D; /* Цвет боковой панели */
+  padding: .25rem;
+  padding-top: 0;
+  box-sizing: border-box; /* Включаем padding в ширину элемента */
+  
+  top: 0; /* Расположение сверху */
+  bottom: 0; /* Расположение снизу */
+  left: 0; /* Расположение слева */
 }
 
 .main-container {
   display: flex;
-  height: 100%;
+  min-height: 100%;
+}
+
+.body-personal,
+.html-personal{
+  margin: 0;
+  height: 100vh; /* Высота 100% окна просмотра */
+  font-family: Arial, sans-serif;
 }
 
 .main-title {
@@ -724,14 +736,6 @@ form
   letter-spacing: 4.2px;
   font-weight: 600;
   color: #fff;
-}
-
-.sidebar {
-  min-width: 21.5rem; /* Ширина боковой панели */
-  background-color: #AA5D5D; /* Цвет боковой панели */
-  padding: .25rem;
-  padding-top: 0;
-  box-sizing: border-box; /* Включаем padding в ширину элемента */
 }
 
 
@@ -863,7 +867,12 @@ form
 }
 
 .question { margin-bottom: 1.25rem; }
-.question ul { list-style-type: none;}
+.question ul { 
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 0.5rem;
+}
 .question li { display: flex; align-items: center; gap: .4375rem; max-width: 50rem;}
 .question img { max-width: 100%; height: auto; }
 .correct { background-color: #aafaa0; }
@@ -907,4 +916,95 @@ form
   box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
 }
 
+.body-forgot {
+  font-family: 'Noto Sans', sans-serif;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f9fc;
+  background: #123456;
+}
 
+.section-forgot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.section-forgot .wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.section-forgot .form header {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.section-forgot .form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.section-forgot .form input[type="email"],
+.section-forgot .form input[type="submit"],
+.section-forgot .form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.section-forgot .form input[type="email"] {
+  font-size: 16px;
+}
+
+.section-forgot .form input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.section-forgot .form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+.ticket-column a.has-errors {
+  color: red;
+}
+.section-tickets-block {
+  display: block;
+}

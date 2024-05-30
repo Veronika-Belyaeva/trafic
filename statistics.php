@@ -1,3 +1,42 @@
+<?php
+session_start();
+require_once 'db_connection.php'; // Подключение к базе данных
+
+$user_id = $_SESSION['user_id'];
+
+// Получение статистики по билетам
+$sql_tickets = "
+    SELECT t.ticket_id, t.ticket_name, COUNT(ua.user_answer_id) AS errors
+    FROM tickets t
+    LEFT JOIN ticketquestions tq ON t.ticket_id = tq.ticket_id
+    LEFT JOIN user_answers ua ON tq.question_id = ua.question_id AND ua.user_id = :user_id
+    WHERE ua.is_correct = FALSE
+    GROUP BY t.ticket_id, t.ticket_name
+";
+
+$stmt_tickets = $pdo->prepare($sql_tickets);
+$stmt_tickets->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_tickets->execute();
+$tickets_stats = $stmt_tickets->fetchAll(PDO::FETCH_ASSOC);
+
+// Получение статистики по темам
+$sql_topics = "
+    SELECT tp.topic_id, tp.topic_name, COUNT(ua.user_answer_id) AS errors
+    FROM topics tp
+    LEFT JOIN questions q ON tp.topic_id = q.topic_id
+    LEFT JOIN user_answers ua ON q.question_id = ua.question_id AND ua.user_id = :user_id
+    WHERE ua.is_correct = FALSE
+    GROUP BY tp.topic_id, tp.topic_name
+";
+
+$stmt_topics = $pdo->prepare($sql_topics);
+$stmt_topics->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_topics->execute();
+$topics_stats = $stmt_topics->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
 <!DOCTYPE html>
 <html class="html-personal" lang="en">
 <head>
@@ -9,7 +48,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Личный кабинет</title>
+  <title>Статистика</title>
 </head>
 <body class="body-personal">
   <div class="main-container">
@@ -87,5 +126,46 @@
         </ul>
       </div>
     </div>
+    <section class="section section-personal">
+      <div class="container-personal">
+        <h1 class="personal-title">Статистика пользователя</h1>
+        
+        <h2>Статистика по билетам</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название билета</th>
+                    <th>Количество ошибок</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($tickets_stats as $ticket): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($ticket['ticket_name']); ?></td>
+                        <td><?php echo htmlspecialchars($ticket['errors']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <h2>Статистика по темам</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название темы</th>
+                    <th>Количество ошибок</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($topics_stats as $topic): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($topic['topic_name']); ?></td>
+                        <td><?php echo htmlspecialchars($topic['errors']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+      </div>
+    </section>
 </body>
 </html>
