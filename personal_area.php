@@ -152,6 +152,19 @@ if(isset($_POST['logout'])) {
     <section class="section section-personal">
       <div class="container-personal">
         <h1 class="personal-title">Контактная информация</h1>
+        <?php
+          // Проверяем, есть ли фото у пользователя
+          if (!empty($photo_path)) {
+              echo '<div class="avatar"><img src="' . $photo_path . '" alt="Avatar"></div>';
+          }
+        ?>
+        <?php
+          // Выводим имя пользователя
+          echo '<p class="info">Имя пользователя</p>';
+          echo '<div class="info-personal">';
+          echo '<p class="info-text">' . $user_data['username'] . '</p>';
+          echo '</div>';
+        ?>
         <p class="info">Телефон</p>
         <div class="info-personal">
           <p class="info-text">

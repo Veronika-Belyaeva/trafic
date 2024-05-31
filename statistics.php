@@ -9,7 +9,16 @@ $sql_tickets = "
     SELECT t.ticket_id, t.ticket_name, COUNT(ua.user_answer_id) AS errors
     FROM tickets t
     LEFT JOIN ticketquestions tq ON t.ticket_id = tq.ticket_id
-    LEFT JOIN user_answers ua ON tq.question_id = ua.question_id AND ua.user_id = :user_id
+    LEFT JOIN (
+        SELECT ua1.*
+        FROM user_answers ua1
+        INNER JOIN (
+            SELECT question_id, MAX(timestamp) AS latest_answer
+            FROM user_answers
+            WHERE user_id = :user_id
+            GROUP BY question_id
+        ) ua2 ON ua1.question_id = ua2.question_id AND ua1.timestamp = ua2.latest_answer
+    ) ua ON tq.question_id = ua.question_id AND ua.user_id = :user_id
     WHERE ua.is_correct = FALSE
     GROUP BY t.ticket_id, t.ticket_name
 ";
@@ -19,12 +28,23 @@ $stmt_tickets->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_tickets->execute();
 $tickets_stats = $stmt_tickets->fetchAll(PDO::FETCH_ASSOC);
 
+
+
 // Получение статистики по темам
 $sql_topics = "
     SELECT tp.topic_id, tp.topic_name, COUNT(ua.user_answer_id) AS errors
     FROM topics tp
     LEFT JOIN questions q ON tp.topic_id = q.topic_id
-    LEFT JOIN user_answers ua ON q.question_id = ua.question_id AND ua.user_id = :user_id
+    LEFT JOIN (
+        SELECT ua1.*
+        FROM user_answers ua1
+        INNER JOIN (
+            SELECT question_id, MAX(timestamp) AS latest_answer
+            FROM user_answers
+            WHERE user_id = :user_id
+            GROUP BY question_id
+        ) ua2 ON ua1.question_id = ua2.question_id AND ua1.timestamp = ua2.latest_answer
+    ) ua ON q.question_id = ua.question_id AND ua.user_id = :user_id
     WHERE ua.is_correct = FALSE
     GROUP BY tp.topic_id, tp.topic_name
 ";
@@ -33,6 +53,22 @@ $stmt_topics = $pdo->prepare($sql_topics);
 $stmt_topics->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_topics->execute();
 $topics_stats = $stmt_topics->fetchAll(PDO::FETCH_ASSOC);
+
+// Обработка запроса на сброс статистики пользователя
+if(isset($_POST['reset_stats'])) {
+  // Здесь вы должны выполнить SQL-запрос для удаления статистики пользователя
+  // Например:
+  $sql_reset = "DELETE FROM user_answers WHERE user_id = :user_id";
+  $stmt_reset = $pdo->prepare($sql_reset);
+  $stmt_reset->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+  $stmt_reset->execute();
+
+  // Перенаправляем пользователя обратно на страницу статистики после сброса
+  header("Location: statistics.php");
+  exit();
+}
+
+
 
 ?>
 
@@ -166,6 +202,10 @@ $topics_stats = $stmt_topics->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
       </div>
+      <form method="post">
+        <button class="button-personal-link" type="submit" name="reset_stats">Сбросить статистику</button>
+      </form>
+
     </section>
 </body>
 </html>

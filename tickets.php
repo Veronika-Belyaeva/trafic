@@ -16,18 +16,17 @@ function getTickets($pdo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Функция для получения количества ошибок для конкретного билета и пользователя
-function getErrorsForTicket($pdo, $ticket_id, $user_id) {
-  $stmt = $pdo->prepare("SELECT COUNT(*) AS error_count FROM user_errors WHERE user_id = :user_id AND ticket_id = :ticket_id");
-  $stmt->bindParam(':user_id', $user_id);
-  $stmt->bindParam(':ticket_id', $ticket_id);
-  $stmt->execute();
-  $result = $stmt->fetch(PDO::FETCH_ASSOC);
-  return $result['error_count'];
+// Функция для получения списка тем
+function getTopics($pdo) {
+    $stmt = $pdo->query("SELECT topic_id, topic_name FROM topics");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // Получение списка билетов
 $tickets = getTickets($pdo);
+
+// Получение списка тем
+$topics = getTopics($pdo);
 ?>
 
 
@@ -156,15 +155,26 @@ $tickets = getTickets($pdo);
       </div>
     </div>
     <section class="section section-tickets">
-    <h1>Список билетов</h1>
-    <div class="ticket-columns">
-        <?php foreach ($tickets as $ticket): ?>
-            <div class="ticket-column">
-                <a href="ticket.php?ticket_id=<?php echo htmlspecialchars($ticket['ticket_id']); ?>"><?php echo htmlspecialchars($ticket['ticket_name']); ?></a>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</section>
+        <h1>Список билетов</h1>
+        <div class="ticket-columns">
+            <?php foreach ($tickets as $ticket): ?>
+                <div class="ticket-column">
+                    <a href="ticket.php?ticket_id=<?php echo htmlspecialchars($ticket['ticket_id']); ?>"><?php echo htmlspecialchars($ticket['ticket_name']); ?></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="section section-tickets">
+        <h1>Список тем</h1>
+        <div class="topic-columns">
+            <?php foreach ($topics as $topic): ?>
+                <div class="topic-column">
+                    <a href="topic_test.php?topic_id=<?php echo htmlspecialchars($topic['topic_id']); ?>"><?php echo htmlspecialchars($topic['topic_name']); ?></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
 
 </body>
 </html>
