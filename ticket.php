@@ -142,6 +142,16 @@ if ($all_answered) {
 // Вывод текущего вопроса
 $current_question = $questions[$current_question_index];
 $answers = $_SESSION['answers'];
+
+
+if(isset($_POST['logout'])) {
+    // Уничтожаем сессию
+    session_unset();
+    session_destroy();
+    // Перенаправляем пользователя на страницу входа
+    header("Location: registration.php");
+    exit();
+}
 ?>
 
 
@@ -232,7 +242,9 @@ $answers = $_SESSION['answers'];
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Выход</a>
+              <form method="post" action="" onsubmit="return confirmLogout();">
+                <button type="submit" name="logout" class="personal-link">Выход</button>
+              </form>
           </li>
         </ul>
       </div>
@@ -272,8 +284,21 @@ $answers = $_SESSION['answers'];
                 <?php endforeach; ?>
             </ul>
         </div>
+        <?php if (!$all_answered && isset($_SESSION['correct_answers'][$current_question_index])): ?>
+        <div class="correct-answer">
+            <p>Верный ответ: <?php echo $questions[$current_question_index]['option' . $questions[$current_question_index]['correct_answer']]; ?></p>
+            <p>Объяснение: <?php echo $questions[$current_question_index]['explanation']; ?></p>
+        </div>
+        <?php endif; ?>
+
         <button class="button-submit" type="submit" <?php echo ($answers[$current_question_index] !== null) ? 'disabled' : ''; ?>>Ответить</button>
     </form>
     </section> 
+    <script>
+    // Функция для отображения окна подтверждения при попытке выхода из учетной записи
+    function confirmLogout() {
+      return confirm("Вы уверены, что хотите выйти?");
+    }
+  </script>
 </body>
 </html>

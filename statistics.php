@@ -6,10 +6,10 @@ $user_id = $_SESSION['user_id'];
 
 // Получение статистики по билетам
 $sql_tickets = "
-    SELECT t.ticket_id, t.ticket_name, COUNT(ua.user_answer_id) AS errors
+    SELECT t.ticket_id, t.ticket_name, SUM(CASE WHEN ua.is_correct = FALSE THEN 1 ELSE 0 END) AS errors
     FROM tickets t
-    LEFT JOIN ticketquestions tq ON t.ticket_id = tq.ticket_id
-    LEFT JOIN (
+    INNER JOIN ticketquestions tq ON t.ticket_id = tq.ticket_id
+    INNER JOIN (
         SELECT ua1.*
         FROM user_answers ua1
         INNER JOIN (
@@ -19,8 +19,8 @@ $sql_tickets = "
             GROUP BY question_id
         ) ua2 ON ua1.question_id = ua2.question_id AND ua1.timestamp = ua2.latest_answer
     ) ua ON tq.question_id = ua.question_id AND ua.user_id = :user_id
-    WHERE ua.is_correct = FALSE
     GROUP BY t.ticket_id, t.ticket_name
+    HAVING COUNT(ua.user_answer_id) > 0
 ";
 
 $stmt_tickets = $pdo->prepare($sql_tickets);
@@ -28,11 +28,9 @@ $stmt_tickets->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_tickets->execute();
 $tickets_stats = $stmt_tickets->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 // Получение статистики по темам
 $sql_topics = "
-    SELECT tp.topic_id, tp.topic_name, COUNT(ua.user_answer_id) AS errors
+    SELECT tp.topic_id, tp.topic_name, SUM(CASE WHEN ua.is_correct = FALSE THEN 1 ELSE 0 END) AS errors
     FROM topics tp
     LEFT JOIN questions q ON tp.topic_id = q.topic_id
     LEFT JOIN (
@@ -45,32 +43,41 @@ $sql_topics = "
             GROUP BY question_id
         ) ua2 ON ua1.question_id = ua2.question_id AND ua1.timestamp = ua2.latest_answer
     ) ua ON q.question_id = ua.question_id AND ua.user_id = :user_id
-    WHERE ua.is_correct = FALSE
     GROUP BY tp.topic_id, tp.topic_name
+    ORDER BY tp.topic_id
+    
 ";
+
 
 $stmt_topics = $pdo->prepare($sql_topics);
 $stmt_topics->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_topics->execute();
 $topics_stats = $stmt_topics->fetchAll(PDO::FETCH_ASSOC);
 
-// Обработка запроса на сброс статистики пользователя
-if(isset($_POST['reset_stats'])) {
-  // Здесь вы должны выполнить SQL-запрос для удаления статистики пользователя
-  // Например:
-  $sql_reset = "DELETE FROM user_answers WHERE user_id = :user_id";
-  $stmt_reset = $pdo->prepare($sql_reset);
-  $stmt_reset->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-  $stmt_reset->execute();
-
-  // Перенаправляем пользователя обратно на страницу статистики после сброса
-  header("Location: statistics.php");
-  exit();
+if (isset($_POST['logout'])) {
+    // Уничтожаем сессию
+    session_unset();
+    session_destroy();
+    // Перенаправляем пользователя на страницу входа
+    header("Location: registration.php");
+    exit();
 }
 
+// Обработка запроса на сброс статистики пользователя
+if (isset($_POST['reset_stats'])) {
+    // Здесь вы должны выполнить SQL-запрос для удаления статистики пользователя
+    // Например:
+    $sql_reset = "DELETE FROM user_answers WHERE user_id = :user_id";
+    $stmt_reset = $pdo->prepare($sql_reset);
+    $stmt_reset->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt_reset->execute();
 
-
+    // Перенаправляем пользователя обратно на страницу статистики после сброса
+    header("Location: statistics.php");
+    exit();
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -157,55 +164,62 @@ if(isset($_POST['reset_stats'])) {
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Выход</a>
+              <form method="post" action="" onsubmit="return confirmLogout();">
+                <button type="submit" name="logout" class="personal-link">Выход</button>
+              </form>
           </li>
         </ul>
       </div>
     </div>
     <section class="section section-personal">
-      <div class="container-personal">
-        <h1 class="personal-title">Статистика пользователя</h1>
-        
-        <h2>Статистика по билетам</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Название билета</th>
-                    <th>Количество ошибок</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($tickets_stats as $ticket): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($ticket['ticket_name']); ?></td>
-                        <td><?php echo htmlspecialchars($ticket['errors']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="container-personal">
+            <h1 class="personal-title">Статистика пользователя</h1>
 
-        <h2>Статистика по темам</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Название темы</th>
-                    <th>Количество ошибок</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($topics_stats as $topic): ?>
+            <h2>Статистика по билетам</h2>
+            <table class="table-statistics">
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($topic['topic_name']); ?></td>
-                        <td><?php echo htmlspecialchars($topic['errors']); ?></td>
+                        <th>Название билета</th>
+                        <th>Количество ошибок</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-      </div>
-      <form method="post">
-        <button class="button-personal-link" type="submit" name="reset_stats">Сбросить статистику</button>
-      </form>
+                </thead>
+                <tbody>
+                    <?php foreach ($tickets_stats as $ticket): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($ticket['ticket_name']); ?></td>
+                            <td><?php echo ($ticket['errors'] == 0) ? 'не было ошибок' : htmlspecialchars($ticket['errors']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
+            <h2>Статистика по темам</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Название темы</th>
+                        <th>Количество ошибок</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($topics_stats as $topic): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($topic['topic_name']); ?></td>
+                            <td><?php echo ($topic['errors'] == 0) ? '' : htmlspecialchars($topic['errors']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <form method="post">
+            <button class="button-personal-link" type="submit" name="reset_stats">Сбросить статистику</button>
+        </form>
     </section>
+    <script>
+    // Функция для отображения окна подтверждения при попытке выхода из учетной записи
+    function confirmLogout() {
+      return confirm("Вы уверены, что хотите выйти?");
+    }
+  </script>
 </body>
 </html>

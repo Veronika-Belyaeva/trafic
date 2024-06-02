@@ -46,6 +46,16 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
+if(isset($_POST['logout'])) {
+  // Уничтожаем сессию
+  session_unset();
+  session_destroy();
+  // Перенаправляем пользователя на страницу входа
+  header("Location: registration.php");
+  exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +89,7 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link active-link">Личный кабинет</a>
+            <a href="personal_area.php" class="personal-link active-link">Личный кабинет</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -92,7 +102,7 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Статистика</a>
+            <a href="statistics.php" class="personal-link">Статистика</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -105,7 +115,7 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Уведомления</a>
+            <a href="notifications.php" class="personal-link">Уведомления</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -118,7 +128,7 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Билеты</a>
+            <a href="tickets.php" class="personal-link">Билеты</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -131,7 +141,9 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Выход</a>
+              <form method="post" action="" onsubmit="return confirmLogout();">
+                <button type="submit" name="logout" class="personal-link">Выход</button>
+              </form>
           </li>
         </ul>
       </div>
@@ -170,5 +182,11 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
       </div>
     </section>
   </div>
+  <script>
+    // Функция для отображения окна подтверждения при попытке выхода из учетной записи
+    function confirmLogout() {
+      return confirm("Вы уверены, что хотите выйти?");
+    }
+  </script>
 </body>
 </html>

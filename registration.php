@@ -1,14 +1,28 @@
 <?php
 require 'db_connection.php';
+session_start();
 
 // Обработка регистрации
 if (isset($_POST['signup'])) {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
 
+    // Проверка совпадения паролей
+    if ($password !== $confirm_password) {
+        $registration_error = "Пароли не совпадают.";
+    } 
+    else if (
+        strlen($password) < 8 || // Проверка на минимальную длину
+        !preg_match('/[A-Z]/', $password) || // Хотя бы одна заглавная латинская буква
+        !preg_match('/\d/', $password) || // Хотя бы одна цифра
+        !preg_match('/[!@#$%^&*()\-_=+{};:,<.>]/', $password) // Хотя бы один из специальных символов
+    ) {
+        $registration_error = "Пароль должен содержать минимум 8 символов, одну заглавную латинскую букву, одну цифру и один специальный символ (!@#$%^&*()\-_=+{};:,<.>).";
+    } 
     // Валидация email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $registration_error = "Некорректный email.";
     } else {
         // Проверка наличия пользователя с таким email в базе данных
@@ -34,7 +48,6 @@ if (isset($_POST['signup'])) {
             $user_id = $pdo->lastInsertId();
 
             // Устанавливаем user_id в сессии
-            session_start();
             $_SESSION['user_id'] = $user_id;
 
             // Редирект на страницу успешной регистрации или другие действия
@@ -54,7 +67,7 @@ if (isset($_POST['login'])) {
         $login_error = "Некорректный email.";
     } else {
         // Получение хешированного пароля из базы данных
-        $stmt = $pdo->prepare("SELECT user_id, password FROM users WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT user_id, password, role FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -62,11 +75,14 @@ if (isset($_POST['login'])) {
         // Проверка пароля
         if ($user && password_verify($password, $user['password'])) {
             // Устанавливаем user_id в сессии
-            session_start();
             $_SESSION['user_id'] = $user['user_id'];
 
-            // Редирект на страницу личного кабинета
-            header("Location: personal_area.php");
+            // Проверяем роль пользователя и перенаправляем в зависимости от роли
+            if ($user['role'] === 'admin') {
+                header("Location: admin_questions.php");
+            } else {
+                header("Location: personal_area.php");
+            }
             exit();
         } else {
             // Неверный email или пароль
@@ -75,6 +91,7 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,23 +105,26 @@ if (isset($_POST['login'])) {
 </head>
 <body class="registration">
 <section class="section-registration">
+<!-- <button type="button" onclick="window.location.href='index.html'">Вернуться на главную</button> -->
     <div class="wrapper">
-        <div class="form signup">
-            <header>Signup</header>
-            <?php if (isset($registration_error)): ?>
-                <p class="error-message"><?php echo htmlspecialchars($registration_error); ?></p>
-            <?php endif; ?>
-            <form action="" method="post">
-                <input type="text" placeholder="Полное имя" id="username" name="username" required>
-                <input type="email" placeholder="Ваш email" id="email" name="email" required>
-                <input type="password" placeholder="Пароль" id="password" name="password" required>
-                <div class="checkbox">
-                    <input type="checkbox" id="signupCheck"/>
-                    <label for="signupCheck">Я принимаю все условия</label>
-                </div>
-                <input type="submit" value="Регистрация" name="signup"/>
-            </form>
-        </div>
+    <div class="form signup">
+        <header>Signup</header>
+        <?php if (isset($registration_error)): ?>
+            <p class="error-message"><?php echo htmlspecialchars($registration_error); ?></p>
+        <?php endif; ?>
+        <form action="" method="post">
+            <input type="text" placeholder="Полное имя" id="username" name="username" required>
+            <input type="email" placeholder="Ваш email" id="email" name="email" required>
+            <input type="password" placeholder="Пароль" id="password" name="password" required>
+            <input type="password" placeholder="Повторите пароль" id="confirm_password" name="confirm_password" required>
+            <div class="checkbox">
+                <input type="checkbox" id="signupCheck"/>
+                <label for="signupCheck">Я принимаю все условия</label>
+            </div>
+            <input type="submit" value="Регистрация" name="signup"/>
+        </form>
+    </div>
+
 
         <div class="form login">
             <header>Вход</header>

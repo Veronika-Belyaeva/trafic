@@ -47,8 +47,6 @@ if(isset($_POST['logout'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html class="html-personal" lang="en">
 <head>
@@ -84,19 +82,6 @@ if(isset($_POST['logout'])) {
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <rect width="90" height="75" fill="url(#pattern0_19_72)"/>
-              <defs>
-              <pattern id="pattern0_19_72" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_19_72" transform="matrix(0.00925926 0 0 0.0111111 0.0833333 0)"/>
-              </pattern>
-              <image id="image0_19_72" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAADFUlEQVR4nO2ZMW4TQRSGJ01QKNyHNC7gAogrEC6QC0Abww2gNkfAdBQUXANIoCG5ggUJDUWETUPhD40yRRSR7M7u2/W/4/dJliLZ+ef9z2/njd+E4DiO4ziO4ziO4ziO4xQLcAd4AXwBlukV/34e31t3fEUA7AGn3MxJ/My64yyhkk9vSfLVZHtlNyVtF3WZNF5o0wG+ZiT6eN3xDhZgkZHoRRgaiHT5tG5dfofCuvy3rrs8sAW8BFZFbh3kdfntjmLYAd6Tz6TULn/Ywfq7mQ2w8y++E8gzeWS89kPge8Mk75Xc5ZfA2GjdA+BPxXo/4j6c1o1xHsXtYlCVHAH2M5tP5C8wa5rwjKYXn7TdMGSAEfCmQZKvJ/wdcD+z8cb/qeIDcDcMGS6reN4iwY0SXrPpxS9+Gqs+DLyKZy2ruCrhUf8B8Az4BPxK++tx2m9vI+7XB2HIdFDF1pwBj8LAq/htzSqepyb1GbhI1fgReJqqdJaq1pphNL3/zCgu0jHoVc0qXqXGOKqx1tg44fHX4E4oYEZRxRx43GDdtglfpadnq6QZxU1GZ3WquKOEL0OhM4rrVbxvHMu42PFmg0HMKjXGUUfxxB5R5HhzkZnkJx3HE2cQRY43F0qPKrCdpmqtxptJ5zVwXnHunvYyXFK8xATupduYxuPNlMC6TPswFe/y5B5VLk9Dh+ksnz3eTNVal7O+DLV+VNUgkz5/sJyUdBOBYqKvNI9JmpAtBn0TEYQT3RbEunzJiZ4qdfmSE32e4etnD/EUm+gsNi2eYo0hFk+xxhCLR84YRqcXT3Si69OLVTxyYGTM6vRiFY8cGBlT05EDsQRZ6ciBWIKsdMxQ6/KI6Zih1uUR0zFDrcsjpmOGmjHEdMxQM4aYjhlqxhDTMUPNGGI6ZqgZQ0zHDDVjiOmYoWYMMR0z1IwhpmOGmjHEdMxQM4aYjhlqxhDTMUPNGGI6ZqgZQ0zHDDVjiOmYoWYMMR0z1IwhpmOGmjHEdMxQM4aYjhlqxhDTMUPNGGI6ZqgZQ0zHcRzHcRzHcRzHcRwnbAD/AHS6nEKS43zVAAAAAElFTkSuQmCC"/>
-              </defs>
-              </svg>
-              
-            <a href="statistics.php" class="personal-link">Статистика</a>
-          </li>
-          <li class="personal-item">
-            <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="90" height="75" fill="url(#pattern0_19_74)"/>
               <defs>
               <pattern id="pattern0_19_74" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -107,19 +92,6 @@ if(isset($_POST['logout'])) {
               </svg>
               
             <a href="notifications.php" class="personal-link">Уведомления</a>
-          </li>
-          <li class="personal-item">
-            <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <rect width="90" height="75" fill="url(#pattern0_19_86)"/>
-              <defs>
-              <pattern id="pattern0_19_86" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_19_86" transform="matrix(0.00925926 0 0 0.0111111 0.0833333 0)"/>
-              </pattern>
-              <image id="image0_19_86" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFEElEQVR4nO2dz4scRRTHK5K4IglKQJNsjD8gFxXxIIjoruhBIZA/wBy8e4k/iMkESQyIYnRzNMlJQfaqkogmCCoIBtEV/JWbmoN6WOMPUKObyZr9SDE1OJl0dXd11dS86qkPzGXoevXed3peVb2qnlEqk8lkMplMJhmAq4AngE+Bc4yXLnAKuFu1CeAG4CvksQQ8rFp0J0sUuV1im3QhnaXkxTY5OQWWkhYb+AtZ/N1KsZHHbMWHfx7YrlIDYaieT+0TG2Go//1ql9gIQ13qW3vERhjqcv/aITbCUMU+pi82wlB2P9MWG2Gocl/TFRthqGp/0xQbYah6PqcnNsJQ9f1OS2yEodx8T0dshKHc/U9DbIShmsUgX2yEoZrH8WCNEuv49iCRx/QIxT4VVj0356TR8YynTOxuOOXcHZNGV4s9qjs7rHpuTk0UKgsdhyx0JLLQkchCRyILHYksdCSy0JHIQkdCutBdYI9erZlXx7xXeX0E/+v4k4zQnYJ2HZfrI8TRaYPQmwrabXS5PkIcG9sg9HRBu80u10eIY3NbU8del+sjxLG3DUJ3+6VLh8HQq9Q5qYNhm1idhY7DR3rgzHd0HL4ApnLqiMO7wOfAWeB7YB64J+foeMwBV+TBMA6vBRc7hVoHsBp4xpw4suIZ4zCvBhVbeq0D2AR8UsdJzxhHK7bHEnza5fqGvt0B/FBXFc8YRyu2VKGBW4Gfa/i2DJwAniyxtRv4GLg41Fanoh3AQkUfh1pZ66BXifupwid9EulFlw/V3ByHzIFHLfI28/61FWKveE/9pNU66A18evVWxkn9Yy4eMd8IzAy9VyX2fNP++h2kxApwAFjlFbRdizKxv/M1nhKPBVPVrscjlr4XfQ2nwlwwNe1abCuZq3/mazwF3hvJsvhSHWYqFkQHfDuQzrKe6nnEdw2wD3gd2Gmr2pmtMNsB9l+B9W0X+ohHbDcDZ4bsnbANpsDzFh9+894wkFDrAO612NELjJs8lu7fWuzOlPz+37+WNg808WPQ+NhrHcAui50PGsa0Hvi6xL8dJW31HL2I/U18GTQ89iU48IbFztMN4llbUYS6UPYtMcv1Io67+iJR6C8tdu53tDMFvF8Ry1M1Zh9FnHbxpcjw2GsdwI8WOxsc7RytiOOFGja2WNr+7uJLkeGx1zqAfyx2phzv5jKfXqlp52pbTHV9sRmWzFrH3KxrIUXM113wmA+siPNtFnqrYyzvFNg45jIH1unK4ssvjQQeMCyZGcdYrjfHCFZMGjnqen4DuG+cg+G42N0wpnVND8iUTO/ebGJv0LBkPvQKrpkeesuriGd9DUvmAnBdMBXr5efhfcU+s77GpfNyMCWrtdCnlGzVuzW+xqVzTg9ywdQs30fUm7ZFHA7RQQocG9U+odFgFfCWpW89g7mzjT89b2NXEFWLNdhv7dW3mJTgnyksA48GCfryzdiLJYPx7aE6epx0WKmqvjmmi30lImsOhuhrcG1vK1NK5W1dZfMc+Gw5uc9C8KcCzBZOamL/CTynRXOcJ8+VzC76LAK3BBV56M7eaXYnUhkgMV/9k6Ys+5AR80rz2mD2I22HHIv4A7hLTRL0ju1WHXYMyeLEidxHf4XNQz2jZmFk6SIV6KWBl8x0KzTa5sHoj8NJBrjNzDhsOykuaBvHg82TW5y7j5hijyu6zeEgy+oJSymz5sy0nhefNse39O6KfmlRv9FFe3ONPkrQuAr3H7lIW4+dlLtFAAAAAElFTkSuQmCC"/>
-              </defs>
-              </svg>
-              
-            <a href="tickets.php" class="personal-link">Билеты</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -140,7 +112,7 @@ if(isset($_POST['logout'])) {
     </div>
     <section class="section section-personal">
       <div class="container-personal">
-        <h1 class="personal-title">Контактная информация</h1>
+        <h1 class="personal-title">Информация об администраторе</h1>
         <?php
           // Проверяем, есть ли фото у пользователя
           if (!empty($photo_path)) {
@@ -149,7 +121,7 @@ if(isset($_POST['logout'])) {
         ?>
         <?php
           // Выводим имя пользователя
-          echo '<p class="info">Имя пользователя</p>';
+          echo '<p class="info">Имя администратора</p>';
           echo '<div class="info-personal">';
           echo '<p class="info-text">' . $user_data['username'] . '</p>';
           echo '</div>';
@@ -168,19 +140,6 @@ if(isset($_POST['logout'])) {
         </div>
       </div>
     </section>
-  </div>
-  <div class="button-personal-link">
-    <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <rect width="90" height="75" fill="url(#pattern0_19_92)"/>
-      <defs>
-      <pattern id="pattern0_19_92" patternContentUnits="objectBoundingBox" width="1" height="1">
-      <use xlink:href="#image0_19_92" transform="matrix(0.00925926 0 0 0.0111111 0.0833333 0)"/>
-      </pattern>
-      <image id="image0_19_92" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAACJUlEQVR4nO3cv0ocURiG8RfTWIWkE0srwRACaS1TauUd2FoEYpEmMF8T2KuIJqm1sdXOW/AG1NhGUEL+wYaBKcRdJzuzZ77jzPf8YMpdZx6OZ85ZZ5UAAAAAAI/aK0lfJX2T9FvSpaR9SS9yn9iQ7Er6K2k85fgjaSf3CQ6BPRD4/vEh94lGiDwmtl9kYjtGJnZD7+cMzZzdALF7NIWUB0s/p9jlOntt1h8Wnc0Zey/3BUSJfa7g4azFa9qE/qWg7E4Ej9gXCsimhOg69mcFYzUxuopdfur3UoHYDFG6iP1OgViDX/NRwh1koUCsxc0rRWwiq/vYRFazkd1mzm76GkX/MGjccmSHYQkjE9sxMrEdIxPbMXL42OYYOWxsyxC5PFgni8iM5L4xpgsiD4Ixkok8CMZIJvIgGCOZyINgjGQiD4Ixkok8CIxkB0R2QGQHRHZAZAdEdrIi6a2kU/6Q6qf87t1hx8HN8XoetQ0eCfCxxHMXfq54uMXHEU8Q9WvJVzidb+gbYpH7IiLcEIvcF9AnzyWtV5uZL5LOiOxnWdJmzaaGzUhiq0wXD3udOPYZI3nSQvUPUkcdLAGLhO/Ze286GH1rzMmTPkX/Yo2HRUnfp9y8iJ3YVs36l9gJHfxno0HsBJ5K+jHDjo7Yc9qecdt81cE6O5TjmrjX1WqkXPo9yX2ifXdzL+7P6nOKrWo1gkQ+SrqVdFJNI89SvTEAAAAAQHn9A4rXWuBinqfwAAAAAElFTkSuQmCC"/>
-      </defs>
-      </svg>
-      
-    <a href="edit_profile.php" class="edit-link">Изменить информацию</a>
   </div>
   <script>
     // Функция для отображения окна подтверждения при попытке выхода из учетной записи

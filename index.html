@@ -24,13 +24,7 @@
         <a href="#about" class="header-link">О нас</a>
       </li>
       <li class="navbar-item">
-        <a href="#study" class="header-link">Учебные материалы</a>
-      </li>
-      <li class="navbar-item">
         <a href="#quiz" class="header-link">Квизы</a>
-      </li>
-      <li class="navbar-item">
-        <a href="#phone" class="header-link">Обратная связь</a>
       </li>
     </ul>
     <a href="/registration.php" class="button-link">
@@ -50,7 +44,7 @@
         <p class="header-text">
           Наш сайт — ваш источник информации о Правилах Дорожного Движения и возможность проверить свои знания через тесты и квизы. Обсудите интересующие вас вопросы на форуме или свяжитесь с нами для получения поддержки.
         </p>
-        <button class="button header-button" data-toggle="modal">Есть вопросы?</button>
+
       </div>
     </div>
   </header>
@@ -69,42 +63,7 @@
     </div>
   </section>
 
-  <section id="study" class="section">
-    <div class="container section-study">
-      <div class="study-content-wrapper">
-        <div class="study-content">
-          <div class="seporator"></div>
-          <h2 class="section-title">Учебный материал</h2>
-          <p class="study-text">
-            Наши учебные материалы доступны для всех, кто желает улучшить свои знания и стать более уверенным участником дорожного движения. У нас вы найдете информацию:
-          </p>
-          <ul class="study-list">
-            <li class="study-item">
-              <img src="image/list.png" alt="dash" class="dash-photo">
-              <span class="study-item-text">Общие положения</span>
-            </li>
-            <li class="study-item">
-              <img src="image/list.png" alt="dash" class="dash-photo">
-              <span class="study-item-text">Светофоры</span>
-            </li>
-            <li class="study-item">
-              <img src="image/list.png" alt="dash" class="dash-photo">
-              <span class="study-item-text">Пешеходные переходы</span>
-            </li>
-            <li class="study-item">
-              <img src="image/list.png" alt="dash" class="dash-photo">
-              <span class="study-item-text">Дорожные знаки</span>
-            </li>
-            <li class="study-item">
-              <img src="image/list.png" alt="dash" class="dash-photo">
-              <span class="study-item-text">Разметка</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <img src="image/bilet.png" alt="" class="study-photo">
-    </div>
-  </section>
+  
   <section id="quiz" class="section grey-section section-school">
     <div class="container quiz">
       <div class="wrapper-school">
@@ -176,63 +135,6 @@
     </div>
     <img src="image/schoolavto.png" alt="schoolavto" class="school-photo">
   </section>
-  <section id="phone" class="cta">
-    <div class="grey-section section-cta">
-      <img src="image/pass.png" alt="pass to exam" class="cta-image">
-      <div class="cta-form-wrapper container">
-        <form action="handler.php" method="POST" class="cta-form">
-          <h2 class="section-title cta-form-title">Вопросы?</h2>
-          <p class="cta-form-text">
-            Оставьте заявку, наш менеджер свяжется с Вами в ближайшее время ответит на все интересующие вопросы и поможем даже в самых сложных случаях!
-          </p>
-          <div class="input-group-wrapper">
-            <div class="input-group">
-              <input 
-              id="user-name" 
-              type="text" 
-              class="input"
-              name="username"
-              placeholder=" "
-              maxLength="100"
-              required
-              >
-              <label class="input-group-label" for="user-name">Имя</label>
-            </div>
-            <!-- /.input-group -->
-            <div class="input-group">
-              <input 
-              id="user-phone" 
-              type="text" 
-              class="input"
-              name="userphone"
-              placeholder=" "
-              maxLength="30"
-              required
-              >
-              <label class="input-group-label" for="user-phone">Номер телефона</label>
-            </div>
-            <!-- /.input-group -->
-          </div>
-          <!-- /.input-group-wrapper -->
-          <div class="cta-form-footer">
-            <button type="submit" class="button cta-form-button">Отправить заявку</button>
-            <div class="notify">
-              <svg class="notify-icon" height="14" width="14">
-                <use href="img/sprite.svg#shield"></use>
-              </svg> 
-              <p class="notify-text">
-                Обращаясь к нам вы получаете не только профессиональную работу, но и абсолютную конфиденциальность информации!
-              </p>
-            </div>
-          </div>
-          <!-- /.cta-form-footer -->
-        </form>
-        <!-- /.cta-form -->
-      </div>
-      <!-- /.cta-form-wrapper -->
-      
-    </div>
-  </section>
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -270,74 +172,10 @@
       </div>
       <!-- /.footer-top -->
     </div>
-    
-    <hr color="#EBEBF0" class="footer-seporator">
-    <div class="container">
-      <div class="footer-wrapper">
-        <div class="footer-legal">
-          <p class="footer-copyright"> 
-            <?php echo date('Y')?> «Traffic laws». Все права защищены.</p>
-            <a href="#" class="footer-policy">Политики конфиденциальности</a>
-        </div>
-        <!-- /.footer-legal -->
-      </div>
-      <!-- /.footer-wrapper -->
     </div>
     <!-- /.container -->
   </footer>
-  <div class="modal">
-    <div class="modal-dialog">
-      <h2 class="modal-title">Есть вопросы?</h2>
-      <a href="#" class="modal-close" data-toggle="modal">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.86726 3.16003L3.16016 3.86714L11.292 11.9989L3.1603 20.1306L3.8674 20.8377L11.9991 12.706L20.1307 20.8377L20.8378 20.1306L12.7062 11.9989L20.838 3.86714L20.1309 3.16003L11.9991 11.2918L3.86726 3.16003Z" fill="#828A99"/>
-          </svg>          
-      </a>
-      <p class="modal-text">
-        Оставьте заявку, наш менеджер свяжется с Вами в ближайшее время ответит на все интересующие вопросы и поможем даже в самых сложных случаях! 
-      </p>
-      <form action="#" class="modal-form">
-        <div class="input-group-wrapper input-group-vertical">
-          <div class="input-group modal-input-group">
-            <input 
-            id="modal-user-name" 
-            type="text" 
-            class="input modal-input"
-            name="username"
-            placeholder=" "
-            maxLength="100"
-            required
-            >
-            <label class="input-group-label modal-input-label" for="modal-user-name">Имя</label>
-          </div>
-          <!-- /.input-group -->
-          <div class="input-group modal-input-group">
-            <input 
-            id="modal-user-phone" 
-            type="text" 
-            class="input modal-input"
-            name="user-phone"
-            placeholder=" "
-            maxLength="30"
-            required
-            >
-            <label class="input-group-label modal-input-label" for="modal-user-phone">Номер телефона</label>
-          </div>
-          <!-- /.input-group -->
-        </div>
-        <!-- /.input-group-wrapper -->
-        <div class="modal-form-footer">
-          <button type="submit" class="button modal-form-button">Отправить заявку</button>
-          <div class="notify">
-            <svg width="35" height="35" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.9222 2.94626L7.42 1.07035C7.2793 1.02345 7.13861 1 6.99792 1C6.83377 1 6.69308 1.02345 6.55239 1.07035L2.05019 2.94626C1.62811 3.13385 1.37017 3.53249 1.37017 3.97802C1.37017 8.64436 4.04335 11.8569 6.55239 12.9121C6.83377 13.0293 7.13861 13.0293 7.42 12.9121C9.43661 12.0679 12.6257 9.18368 12.6257 3.97802C12.6257 3.53249 12.3443 3.13385 11.9222 2.94626ZM10.1617 5.72512L6.50549 9.14349C6.3648 9.30763 6.10686 9.30763 5.96616 9.14349L3.95625 7.37141C3.81556 7.23072 3.81556 6.99623 3.95625 6.85554L4.24099 6.5708C4.38168 6.43011 4.61617 6.43011 4.75687 6.5708L6.30267 7.91226L9.41619 4.97962C9.55689 4.83893 9.79138 4.83893 9.93207 4.97962L10.1617 5.20924C10.3024 5.34994 10.3024 5.58443 10.1617 5.72512Z" fill="#828A99"/>
-              </svg>               
-            <p class="notify-text">
-              Обращаясь к нам вы получаете не только профессиональную работу, но и абсолютную конфиденциальность информации!
-            </p>
-          </div>
-        </div>
-        <!-- /.modal-form-footer -->
+  
       </form>
     </div>
   </div>

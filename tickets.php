@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-// Проверяем, есть ли пользователь вошедший в систему (значит, у нас есть user_id в сессии)
-if (!isset($_SESSION['user_id'])) {
-    // Если пользователь не вошел в систему, перенаправляем его на страницу входа
-    header("Location: registration.php");
-    exit();
-}
-
 require 'db_connection.php';
 
 // Функция для получения списка билетов
@@ -27,6 +20,16 @@ $tickets = getTickets($pdo);
 
 // Получение списка тем
 $topics = getTopics($pdo);
+
+// Обработка выхода из учетной записи
+if(isset($_POST['logout'])) {
+  // Уничтожаем сессию
+  session_unset();
+  session_destroy();
+  // Перенаправляем пользователя на страницу входа
+  header("Location: registration.php");
+  exit();
+}
 ?>
 
 
@@ -43,9 +46,13 @@ $topics = getTopics($pdo);
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .ticket-columns {
+    .ticket-columns,
+    .topic-columns {
       column-count: 3; /* Указываем желаемое количество колонок */
       column-gap: 6.25rem; /* Отступ между колонками */
+    }
+    .ticket-columns {
+      column-count: 5;
     }
 
     .ticket-column {
@@ -55,13 +62,14 @@ $topics = getTopics($pdo);
     .ticket-column a {
       text-decoration: none;
       color: #000;
-      padding: 7px;
+      line-height: 170%;
     }
-    .ticket-column a:hover {
-      color: #ff2e16;
+    .ticket-column:hover {
+      background-color: #AA5D5D; 
       border-radius: 10px;
-      background-color: #010101; 
+      
     }
+    
 
     /* Дополнительные стили для списка билетов */
     .ticket-list {
@@ -149,13 +157,23 @@ $topics = getTopics($pdo);
               </defs>
               </svg>
               
-            <a href="#" class="personal-link">Выход</a>
+              <form method="post" action="" onsubmit="return confirmLogout();">
+                <button type="submit" name="logout" class="personal-link">Выход</button>
+              </form>
           </li>
         </ul>
       </div>
     </div>
     <section class="section section-tickets">
-        <h1>Список билетов</h1>
+    <h1>Список билетов и тем</h1>
+    <div class="">
+        <form action="" method="post" class="wrapper-buttons">
+            <button type="submit" name="show_tickets" class="button-tickets">Список билетов</button>
+            <button type="submit" name="show_topics" class="button-tickets">Список тем</button>
+        </form>
+    </div>
+    <?php if(isset($_POST['show_tickets'])): ?>
+        <h2>Список билетов</h2>
         <div class="ticket-columns">
             <?php foreach ($tickets as $ticket): ?>
                 <div class="ticket-column">
@@ -163,19 +181,26 @@ $topics = getTopics($pdo);
                 </div>
             <?php endforeach; ?>
         </div>
-    </section>
+    <?php endif; ?>
 
-    <section class="section section-tickets">
-        <h1>Список тем</h1>
+    <?php if(isset($_POST['show_topics'])): ?>
+        <h2>Список тем</h2>
         <div class="topic-columns">
             <?php foreach ($topics as $topic): ?>
-                <div class="topic-column">
+                <div class="ticket-column">
                     <a href="topic_test.php?topic_id=<?php echo htmlspecialchars($topic['topic_id']); ?>"><?php echo htmlspecialchars($topic['topic_name']); ?></a>
                 </div>
             <?php endforeach; ?>
         </div>
-    </section>
+    <?php endif; ?>
+</section>
 
+<script>
+    // Функция для отображения окна подтверждения при попытке выхода из учетной записи
+    function confirmLogout() {
+      return confirm("Вы уверены, что хотите выйти?");
+    }
+  </script>
 </body>
 </html>
 
