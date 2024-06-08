@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Проверяем, есть ли пользователь вошедший в систему (значит, у нас есть user_id в сессии)
@@ -32,9 +33,10 @@ $stmt->execute([$user_id]);
 $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Здесь вы можете получить другие данные пользователя, такие как телефон и т.д.
-$email = $user_data['email'];
+$email = $user_data['email']; 
 $phone = $user_data['phone']; // Предположим, что поле с телефоном называется "phone"
-$photo_path = $user_data['photo']; // Предположим, что фото пользователя хранится в поле 'photo'
+$photo = isset($user_data['photo']) ? 'data:image/jpeg;base64,' . base64_encode($user_data['photo']) : '';
+
 
 
 if(isset($_POST['logout'])) {
@@ -141,12 +143,7 @@ if(isset($_POST['logout'])) {
     <section class="section section-personal">
       <div class="container-personal">
         <h1 class="personal-title">Контактная информация</h1>
-        <?php
-          // Проверяем, есть ли фото у пользователя
-          if (!empty($photo_path)) {
-              echo '<div class="avatar"><img src="' . $photo_path . '" alt="Avatar"></div>';
-          }
-        ?>
+        <img src="<?= htmlspecialchars($photo) ?>" alt="Profile Picture" id="profile-picture">
         <?php
           // Выводим имя пользователя
           echo '<p class="info">Имя пользователя</p>';

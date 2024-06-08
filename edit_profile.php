@@ -11,30 +11,17 @@ if (!isset($_SESSION['user_id'])) {
 // Получаем user_id из сессии
 $user_id = $_SESSION['user_id'];
 
-// Подключение к базе данных
-$host = 'localhost'; // Хост базы данных
-$port = '5432'; // Порт базы данных
-$dbname = 'Tickets';
-$username = 'postgres';
-$password = 'cgQ1wpi';
-
-try {
-    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$username;password=$password");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Ошибка подключения к базе данных: " . $e->getMessage());
-}
+require 'db_connection.php';
 
 // Обработка запроса на обновление профиля
 if (isset($_POST['update_profile'])) {
     // Получаем данные из формы
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $phone = $_POST['phone']; // Предположим, что поле с телефоном называется "phone"
     
     // Обновляем данные в базе данных
-    $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ?, phone = ? WHERE user_id = ?");
-    $stmt->execute([$username, $email, $phone, $user_id]);
+    $stmt = $pdo->prepare("UPDATE users SET username = ?, phone = ? WHERE user_id = ?");
+    $stmt->execute([$username, $phone, $user_id]);
     
     // Перенаправляем пользователя обратно на страницу профиля
     header("Location: personal_area.php");
@@ -46,7 +33,6 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 if(isset($_POST['logout'])) {
   // Уничтожаем сессию
   session_unset();
@@ -55,7 +41,6 @@ if(isset($_POST['logout'])) {
   header("Location: registration.php");
   exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -154,9 +139,6 @@ if(isset($_POST['logout'])) {
         <form action="" method="post" class="form-edit" enctype="multipart/form-data">
             <label for="username">Имя пользователя:</label>
             <input type="text" id="username" name="username" value="<?php echo $user_data['username']; ?>" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?php echo $user_data['email']; ?>" required>
             
             <label for="phone">Телефон:</label>
             <input type="text" id="phone" name="phone" value="<?php echo $user_data['phone']; ?>">

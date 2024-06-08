@@ -1,52 +1,56 @@
 <?php
 session_start();
 
-// Проверяем, есть ли пользователь вошедший в систему (значит, у нас есть user_id в сессии)
 if (!isset($_SESSION['user_id'])) {
-    // Если пользователь не вошел в систему, перенаправляем его на страницу входа
     header("Location: registration.php");
     exit();
 }
 
-// Получаем user_id из сессии
 $user_id = $_SESSION['user_id'];
 
-// Проверяем время последнего доступа пользователя
-if (isset($_SESSION['last_access']) && time() - $_SESSION['last_access'] > 900) { // 900 секунд = 15 минут
-    // Если прошло более 15 минут с момента последнего доступа, разлогиниваем пользователя
+if (isset($_SESSION['last_access']) && time() - $_SESSION['last_access'] > 900) {
     unset($_SESSION['user_id']);
     unset($_SESSION['last_access']);
-    header("Location: registration.php"); // перенаправляем на страницу входа
+    header("Location: registration.php");
     exit();
 }
 
-// Обновляем время последнего доступа пользователя
 $_SESSION['last_access'] = time();
 
-// Подключение к базе данных
 require 'db_connection.php';
 
-// Получаем данные пользователя из базы данных, включая фото
 $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Здесь вы можете получить другие данные пользователя, такие как телефон и т.д.
 $email = $user_data['email'];
-$phone = $user_data['phone']; // Предположим, что поле с телефоном называется "phone"
-$photo_path = $user_data['photo']; // Предположим, что фото пользователя хранится в поле 'photo'
+$phone = $user_data['phone'];
+$photo_path = $user_data['photo'];
 
+// Получение всех сообщений
+$stmt = $pdo->prepare("SELECT * FROM messages");
+$stmt->execute();
+$messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if(isset($_POST['logout'])) {
-    // Уничтожаем сессию
+// Обработка отправки сообщения
+if (isset($_POST['send_message'])) {
+    $message = $_POST['message'];
+    $receiver_id = $_POST['receiver_id'];
+    $stmt = $pdo->prepare("INSERT INTO messages (sender_id, receiver_id, message) VALUES (?, ?, ?)");
+    try {
+        $stmt->execute([$user_id, $receiver_id, $message]);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    // Перенаправляем пользователя на страницу входа
     header("Location: registration.php");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html class="html-personal" lang="en">
 <head>
@@ -78,7 +82,7 @@ if(isset($_POST['logout'])) {
               </defs>
               </svg>
               
-            <a href="personal_area.php" class="personal-link active-link">Личный кабинет</a>
+            <a href="admin_area.php" class="personal-link active-link">Личный кабинет</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -91,7 +95,7 @@ if(isset($_POST['logout'])) {
               </defs>
               </svg>
               
-            <a href="notifications.php" class="personal-link">Уведомления</a>
+            <a href="admin-notifications.php" class="personal-link">Уведомления</a>
           </li>
           <li class="personal-item">
             <svg width="60" height="45" viewBox="0 0 90 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -111,35 +115,27 @@ if(isset($_POST['logout'])) {
       </div>
     </div>
     <section class="section section-personal">
-      <div class="container-personal">
-        <h1 class="personal-title">Информация об администраторе</h1>
-        <?php
-          // Проверяем, есть ли фото у пользователя
-          if (!empty($photo_path)) {
-              echo '<div class="avatar"><img src="' . $photo_path . '" alt="Avatar"></div>';
-          }
-        ?>
-        <?php
-          // Выводим имя пользователя
-          echo '<p class="info">Имя администратора</p>';
-          echo '<div class="info-personal">';
-          echo '<p class="info-text">' . $user_data['username'] . '</p>';
-          echo '</div>';
-        ?>
-        <p class="info">Телефон</p>
-        <div class="info-personal">
-          <p class="info-text">
-            <?php if (!empty($phone)): 
-            echo $phone; 
-            endif; ?>
-          </p>
+        <div class="container-personal">
+            <h1 class="personal-title">Информация об администраторе</h1>
+            <?php if (!empty($photo_path)): ?>
+                <div class="avatar"><img src="<?= $photo_path ?>" alt="Avatar"></div>
+            <?php endif; ?>
+            <p class="info">Имя администратора</p>
+            <div class="info-personal">
+                <p class="info-text"><?= $user_data['username'] ?></p>
+            </div>
+            <p class="info">Телефон</p>
+            <div class="info-personal">
+                <p class="info-text"><?= $phone ?></p>
+            </div>
+            <p class="info">Почта</p>
+            <div class="info-personal">
+                <p class="info-text"><?= $email ?></p>
+            </div>
         </div>
-        <p class="info">Почта</p>
-        <div class="info-personal">
-          <p class="info-text"><?php echo $email; ?></p>
-        </div>
-      </div>
     </section>
+
+  
   </div>
   <script>
     // Функция для отображения окна подтверждения при попытке выхода из учетной записи
